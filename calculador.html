@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/misEstilos.css">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="content">
+        <table>
+            <tr>
+                <td colspan="4"><input type="text" id="lcd" value=""></td>
+            </tr>
+            <tr>
+                <td><button onclick="mostrar(7)">7</button></td>
+                <td><button onclick="mostrar(8)">8</button></td>
+                <td><button onclick="mostrar(9)">9</button></td>
+                <td><button onclick="obtenerOperador('suma')">+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="mostrar(4)">4</button></td>
+                <td><button onclick="mostrar(5)">5</button></td>
+                <td><button onclick="mostrar(6)">6</button></td>
+                <td><button onclick="obtenerOperador('resta')">-</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="mostrar(1)">1</button></td>
+                <td><button onclick="mostrar(2)">2</button></td>
+                <td><button onclick="mostrar(3)">3</button></td>
+                <td><button onclick="obtenerOperador('multiplicacion')">*</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="mostrar(0)">0</button></td>
+                <td><button onclick="limpiar()">CE</button></td>
+                <td><button onclick="obtenerResultado()">=</button></td>
+                <td><button onclick="obtenerOperador('division')">/</button></td>
+            </tr>
+
+        </table>
+    </div>
+    <script>
+        var pantalla = '';
+        var operador = '';
+        var numero1 = 0;
+        var numero2 = 0;
+        function mostrar(valor) {
+            pantalla = pantalla + valor;
+            document.getElementById('lcd').value = pantalla;
+        }
+
+        function obtenerOperador(operacion) {
+            numero1 = document.getElementById('lcd').value;
+            operador = operacion;
+            document.getElementById('lcd').value = '';
+            pantalla = '';
+        }
+
+        function obtenerResultado() {
+            numero2 = document.getElementById('lcd').value;
+            switch (operador) {
+                case "suma":
+                    resultado = parseInt(numero1) + parseInt(numero2);
+                    break;
+                case "resta":
+                    resultado = parseInt(numero1) - parseInt(numero2);
+                    break;
+                case "multiplicacion":
+                    resultado = parseInt(numero1) * parseInt(numero2);
+                    break;
+                case "division":
+                    if (numero2 > 0) {
+                        resultado = parseInt(numero1) / parseInt(numero2);
+                    } else {
+
+                        document.getElementById('lcd').style.fontSize = 'large';
+                    }
+                    break;
+                default:
+                    break;
+            }
+            document.getElementById('lcd').value = resultado;
+            pantalla = '';
+        }
+
+        function limpiar() {
+            document.getElementById('lcd').value = '';
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
